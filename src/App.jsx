@@ -5,13 +5,16 @@ import Header from './components/Header'
 import ProductList from './components/ProductList';
 import { Router } from 'react-router-dom';
 import RouterConfig from './config/RouterConfig';
+import Home from './pages/Home';
+import Loading from './components/Loading';
 
 function App() {
   return (
     <>
       <PageContainer>
+        <Loading />
         <Header />
-        <ProductList />
+
         <RouterConfig />
       </PageContainer>
     </>

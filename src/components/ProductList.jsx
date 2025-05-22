@@ -12,7 +12,7 @@ function ProductList() {
     }, [])
 
     return (
-        <div className='product-list flex flex-wrap justify-center gap-32'>
+        <div className='product-list flex flex-wrap justify-center gap-5 mt-20'>
             {products && products.map((product) => {
                 return <Product key={product.id} product={product} />
             })}
