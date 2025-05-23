@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { setSelectedProduct } from '../redux/slices/ProductSlice'
 import { useDispatch } from 'react-redux'
+import { addToBasket } from '../redux/slices/basketSlice'
 
 
 function ProductDetails() {
@@ -10,6 +11,8 @@ function ProductDetails() {
     const { products, selectedProduct } = useSelector((store) => store.product)
     const dispatch = useDispatch()
 
+    const [count, setCount] = React.useState(0);
+    console.log(count);
     useEffect(() => {
         getProductbyId()
     }, [])
@@ -22,7 +25,13 @@ function ProductDetails() {
         });
     }
 
+    const addBasket = () => {
+        const { price, image, title, description } = selectedProduct;
+        const payload = { id, price, image, title, description, count };
 
+        dispatch(addToBasket(payload));
+
+    }
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10">
@@ -67,11 +76,13 @@ function ProductDetails() {
                         <label className="text-sm">Quantity</label>
                         <input
                             type="number"
-                            defaultValue={1}
+                            value={count}
                             min={1}
                             className="w-16 border rounded px-2 py-1 text-center"
+                            onChange={(e) => setCount(Number(e.target.value))}
                         />
-                        <button className="bg-black text-white px-6 py-2 text-sm font-semibold hover:bg-gray-800">
+
+                        <button className="bg-black text-white px-6 py-2 text-sm font-semibold hover:bg-gray-800" onClick={addBasket}>
                             ADD TO CART
                         </button>
                     </div>
